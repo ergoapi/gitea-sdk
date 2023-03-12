@@ -9,7 +9,7 @@ Note: function arguments are escaped by the SDK.
 ## Use it
 
 ```go
-import "github.com/ergoapi/go-sdk/gitea"
+import "github.com/ergoapi/gitea-sdk/gitea"
 ```
 
 ## Version Requirements

@@ -1,4 +1,4 @@
-module github.com/ergoapi/go-sdk
+module github.com/ergoapi/gitea-sdk
 
 go 1.13
 
