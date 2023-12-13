@@ -427,11 +427,11 @@ type EditRepoOption struct {
 	// either `true` to enable project unit, or `false` to disable them.
 	HasProjects *bool `json:"has_projects,omitempty"`
 	// either `true` to enable release, or `false` to disable them.
-	HasReleases bool  `json:"has_releases,omitempty"`
+	HasReleases *bool  `json:"has_releases,omitempty"`
 	// either `true` to enable packages, or `false` to disable them.
-	HasPackages bool  `json:"has_packages,omitempty"`
+	HasPackages *bool  `json:"has_packages,omitempty"`
 	// either `true` to enable actions, or `false` to disable them.
-	HasActions  bool  `json:"has_actions,omitempty"`
+	HasActions  *bool  `json:"has_actions,omitempty"`
 	// either `true` to ignore whitespace for conflicts, or `false` to not ignore whitespace. `has_pull_requests` must be `true`.
 	IgnoreWhitespaceConflicts *bool `json:"ignore_whitespace_conflicts,omitempty"`
 	// either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits. `has_pull_requests` must be `true`.
