@@ -85,6 +85,9 @@ type Repository struct {
 	ExternalWiki              *ExternalWiki    `json:"external_wiki,omitempty"`
 	HasPullRequests           bool             `json:"has_pull_requests"`
 	HasProjects               bool             `json:"has_projects"`
+	HasReleases               bool             `json:"has_releases,omitempty"`
+	HasPackages               bool             `json:"has_packages,omitempty"`
+	HasActions                bool             `json:"has_actions,omitempty"`
 	IgnoreWhitespaceConflicts bool             `json:"ignore_whitespace_conflicts"`
 	AllowMerge                bool             `json:"allow_merge_commits"`
 	AllowRebase               bool             `json:"allow_rebase"`
