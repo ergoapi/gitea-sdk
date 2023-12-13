@@ -8,23 +8,12 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"net/http"
 )
 
 type CreateOrUpdateSecretOption struct {
 	Description string `json:"description,omitempty"`
 	Data        string `json:"data"`
-}
-
-// PushMirrorResponse returns a git push mirror
-type PushMirrorResponse struct {
-	Created       string `json:"created"`
-	Interval      string `json:"interval"`
-	LastError     string `json:"last_error"`
-	LastUpdate    string `json:"last_update"`
-	RemoteAddress string `json:"remote_address"`
-	RemoteName    string `json:"remote_name"`
-	RepoName      string `json:"repo_name"`
-	SyncONCommit  bool   `json:"sync_on_commit"`
 }
 
 // CreateOrUpdateRepoSecret create or update a secret value in a repository
@@ -36,8 +25,14 @@ func (c *Client) CreateOrUpdateRepoSecret(user, repo, secret string, opt CreateO
 	if err != nil {
 		return nil, err
 	}
-	_, resp, err := c.getResponse("POST", fmt.Sprintf("/repos/%s/%s/actions/secrets/%s", user, repo, secret), jsonHeader, bytes.NewReader(body))
-	return resp, err
+	status, resp, err := c.getStatusCode("PUT", fmt.Sprintf("/repos/%s/%s/actions/secrets/%s", user, repo, secret), jsonHeader, bytes.NewReader(body))
+	if err != nil {
+		return resp, err
+	}
+	if status == http.StatusCreated || status == http.StatusNoContent {
+		return resp, nil
+	}
+	return resp, fmt.Errorf("unexpected Status: %d", status)
 }
 
 // DeleteRepoSecret detele a secret in a repository
